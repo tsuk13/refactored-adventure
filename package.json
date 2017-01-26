@@ -1,0 +1,19 @@
+{
+  "name": "d-va-bot",
+  "version": "1.0.0",
+  "description": "Discord Bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsuk13/refactored-adventure.git"
+  },
+  "author": "Travace Reese",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsuk13/refactored-adventure/issues"
+  },
+  "homepage": "https://github.com/tsuk13/refactored-adventure#readme"
+}
