@@ -7,8 +7,34 @@ var youTube = new YouTube();
 youTube.setKey(config.youTubeKey);
 
 //Globals
-var volume = .5
+var volume = .5;
+var queue = [];
+var queuePosition = 0;
 
+//Song queue Helper
+var playQueueSong = function(song){
+	if(!(queue[queuePosition])){
+		return false;
+	}
+	var requestUrl = 'http://youtube.com/watch?v=' + song.id;
+	var streamOptions = { seek: 0, volume: volume};
+	client.channels.get(config.channel).join().then(connection => {
+		var stream = ytdl(requestUrl, {filter: 'audioonly'});
+		var dispatcher = connection.playStream(stream, streamOptions);
+		dispatcher.on("end", reason => {
+			console.log(queue);
+			console.log(queuePosition);
+			queuePosition++;
+			if(queue[queuePosition]){
+				playQueueSong(queue[queuePosition]);
+			}
+		});
+	})
+	.catch(console.error);
+	return true;
+}
+
+//Events
 client.on("message", msg => {
 	var prefix = config.prefix;
 	//return if not prefix command
@@ -33,6 +59,36 @@ client.on("message", msg => {
     }
     if(msg.content.startsWith(prefix + "stopNyan")){
     	client.channels.get(config.channel).leave();
+    	return;
+    }
+    if(msg.content.startsWith(prefix + "startQueuedMusic")){
+    	if(playQueueSong(queue[queuePosition])){
+    		msg.channel.sendMessage("Starting Queued Music");
+    	}
+    	else{
+    		msg.channel.sendMessage("No Music Queued");
+    	}
+    	return;
+    }
+    if(msg.content.startsWith(prefix + "queueMusic")){
+    	var sublength = (prefix + "queueMusic").length;
+    	var searchTerms = msg.content.substring(sublength);
+    	youTube.search(searchTerms, 1, function(error, result) {
+    		if(error){
+    			console.log(error);
+    			msg.channel.sendMessage("Opps! Something went wrong!");
+    		}
+    		else {
+    			var song = {
+    				"id": result.items[0].id.videoId,
+    				"title": result.items[0].snippet.title,
+    				"desc": result.items[0].snippet.description
+    			};
+    			var position = queue.push(song);
+    			var diff = position - queuePosition;
+    			msg.channel.sendMessage("Queued: " + song.title+ "\nPlace in Queue: " + diff);
+    		}
+    	});
     	return;
     }
     if(msg.content.startsWith(prefix + "music")){
