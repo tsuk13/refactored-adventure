@@ -18,4 +18,11 @@ client.on('ready', () => {
   console.log('I am ready!');
 });
 
+bot.on("guildMemberAdd", (member) => {
+    console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
+    member.guild.defaultChannel.sendMessage(`Welcome "${member.user.username}"!!!!`);
+});
+
+bot.on('error', e => { console.error(e); });
+
 client.login(config.token);

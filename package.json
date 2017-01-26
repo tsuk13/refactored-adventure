@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/tsuk13/refactored-adventure#readme",
   "dependencies": {
-    "discord.js": "^11.0.0"
+    "discord.js": "^11.0.0",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "node-opus": "^0.2.4"
   }
 }
