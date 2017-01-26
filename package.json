@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tsuk13/refactored-adventure/issues"
   },
-  "homepage": "https://github.com/tsuk13/refactored-adventure#readme"
+  "homepage": "https://github.com/tsuk13/refactored-adventure#readme",
+  "dependencies": {
+    "discord.js": "^11.0.0"
+  }
 }
