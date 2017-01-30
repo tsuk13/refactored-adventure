@@ -1,0 +1,18 @@
+{
+	"queueSong": "music queue",
+	"play": "music play",
+	"pause": "music pause",
+	"stop": "music stop",
+	"next": "music next",
+	"prev": "music prev",
+	"info": "music info",
+	"goto": "music goto",
+	"list": "music list",
+	"save": "music save",
+	"load": "music load",
+	"clear": "music clear",
+	"playlists": "music playlists",
+	"shuffle": "music shuffle",
+	"remove": "music remove",
+	"volume": "music volume"
+}
